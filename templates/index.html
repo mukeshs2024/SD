@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Wallet & Payment Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --accent: #06b6d4;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #4f46e5, #06b6d4);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 868px) {
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .wallet-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .wallet-btn {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .wallet-btn.active, .wallet-btn:hover {
+      border-color: var(--primary);
+      color: var(--text-main);
+      background: rgba(79, 70, 229, 0.15);
+    }
+
+    .wallet-btn .w-id {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .wallet-btn .w-holder {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .balance-display {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(6, 182, 212, 0.1));
+      border: 1px solid rgba(79, 70, 229, 0.4);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .balance-display .amount {
+      font-size: 36px;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    .balance-display .meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--primary);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #334155;
+    }
+    .btn-secondary:hover {
+      background: #475569;
+    }
+
+    .feed-container {
+      max-height: 380px;
+      overflow-y: auto;
+    }
+
+    .feed-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid #334155;
+      font-size: 13px;
+    }
+
+    .feed-item:last-child {
+      border-bottom: none;
+    }
+
+    .feed-item .icon {
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .badge-success {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+    }
+
+    .receipt-link {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .receipt-link:hover {
+      text-decoration: underline;
+    }
+
+    .alert-banner {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .alert-success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--success);
+      color: #6ee7b7;
+    }
+    .alert-error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--danger);
+      color: #fca5a5;
+    }
+
+    .system-status {
+      display: flex;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    .system-status span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="brand-icon">DW</div>
+        <div>
+          <h1 style="font-size: 20px;">Digital Wallet & Payment Platform</h1>
+          <p style="font-size: 12px; color: var(--text-muted);">College Practical Assignment: Round 2 (LLD) & Round 3 (HLD)</p>
+        </div>
+      </div>
+      <div>
+        <span class="badge">● Core API Online</span>
+      </div>
+    </header>
+
+    <div id="alertBox" class="alert-banner"></div>
+
+    <div class="grid-layout">
+      <!-- WALLET OVERVIEW & ADD MONEY -->
+      <div class="card">
+        <h2><span>💳</span> Wallet Balance & Quick Actions</h2>
+        <div class="wallet-selector" id="walletSelector">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div class="balance-display">
+          <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted)">Current Available Balance</div>
+          <div class="amount" id="balanceAmount">₹ 0.00</div>
+          <div class="meta" id="balanceMeta">Select a wallet to load live data</div>
+        </div>
+
+        <h3 style="font-size: 14px; margin-bottom: 10px; color: var(--text-muted)">➕ Add Money to Selected Wallet</h3>
+        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+          <input type="number" id="addAmount" placeholder="Amount (e.g. 500)" style="flex: 2; padding: 10px; background: #0f172a; border: 1px solid var(--card-border); color: #fff; border-radius: 8px;">
+          <select id="paymentMethod" style="flex: 1; padding: 10px; background: #0f172a; border: 1px solid var(--card-border); color: #fff; border-radius: 8px;">
+            <option value="UPI">UPI</option>
+            <option value="CARD">Card</option>
+            <option value="NETBANKING">NetBanking</option>
+          </select>
+          <button class="btn" style="flex: 1;" onclick="addMoney()">Add</button>
+        </div>
+      </div>
+
+      <!-- P2P MONEY TRANSFER -->
+      <div class="card">
+        <h2><span>🔄</span> Instant P2P Transfer (ACID Atomic)</h2>
+        <div class="form-group">
+          <label>Sender Wallet ID (Debited)</label>
+          <select id="transferFrom"></select>
+        </div>
+        <div class="form-group">
+          <label>Receiver Wallet ID (Credited)</label>
+          <select id="transferTo"></select>
+        </div>
+        <div class="form-group">
+          <label>Transfer Amount (INR)</label>
+          <input type="number" id="transferAmount" placeholder="Enter amount to transfer">
+        </div>
+        <div class="form-group">
+          <label>Idempotency Key (Optional - Prevents Duplicates)</label>
+          <input type="text" id="idempotencyKey" placeholder="e.g. IDEMP-2026-001">
+        </div>
+        <button class="btn" onclick="executeTransfer()">Transfer Funds Now</button>
+      </div>
+    </div>
+
+    <!-- TRANSACTION HISTORY & RECEIPT DOWNLOAD -->
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h2><span>📜</span> Transaction Audit Trail & PDF Receipts</h2>
+        <button class="btn btn-secondary" style="width: auto; padding: 6px 12px; font-size: 12px;" onclick="fetchTransactions()">Refresh History</button>
+      </div>
+      <div class="feed-container" id="transactionsList">
+        <p style="color: var(--text-muted); text-align: center; padding: 24px;">Select a wallet or perform transactions to see history.</p>
+      </div>
+    </div>
+
+    <footer style="margin-top: 24px; text-align: center; font-size: 12px; color: var(--text-muted);">
+      <div class="system-status" style="justify-content: center;">
+        <span><span class="dot"></span> SQLite / PostgreSQL ACID Engine</span>
+        <span><span class="dot"></span> Redis Cache-Aside Layer</span>
+        <span><span class="dot"></span> Event-Driven Notification Bus</span>
+      </div>
+      <p style="margin-top: 8px;">REST API: <code>/api/wallets/&lt;id&gt;/balance</code> | <code>/api/transfers</code> | <code>/api/transactions/&lt;id&gt;/download</code></p>
+    </footer>
+  </div>
+
+  <script>
+    let activeWalletId = "W101";
+    let walletsCache = [];
+
+    async function loadWallets() {
+      try {
+        const res = await fetch('/api/wallets');
+        const data = await res.json();
+        walletsCache = data.wallets || [];
+        renderWalletSelectors();
+        fetchBalance(activeWalletId);
+        fetchTransactions();
+      } catch (e) {
+        showAlert("Failed to connect to backend API: " + e.message, "error");
+      }
+    }
+
+    function renderWalletSelectors() {
+      const container = document.getElementById("walletSelector");
+      const fromSel = document.getElementById("transferFrom");
+      const toSel = document.getElementById("transferTo");
+
+      container.innerHTML = "";
+      fromSel.innerHTML = "";
+      toSel.innerHTML = "";
+
+      walletsCache.forEach((w, idx) => {
+        // Top selector cards
+        const btn = document.createElement("div");
+        btn.className = `wallet-btn ${w.walletId === activeWalletId ? 'active' : ''}`;
+        btn.onclick = () => selectWallet(w.walletId);
+        btn.innerHTML = `
+          <div class="w-id">${w.walletId}</div>
+          <div class="w-holder">${w.userId} (${w.currency})</div>
+        `;
+        container.appendChild(btn);
+
+        // Dropdowns
+        fromSel.add(new Option(`${w.walletId} (Bal: ₹${w.balance})`, w.walletId, false, w.walletId === activeWalletId));
+        toSel.add(new Option(`${w.walletId} (Bal: ₹${w.balance})`, w.walletId, false, idx === 1));
+      });
+    }
+
+    function selectWallet(walletId) {
+      activeWalletId = walletId;
+      document.querySelectorAll(".wallet-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.innerText.includes(walletId));
+      });
+      document.getElementById("transferFrom").value = walletId;
+      fetchBalance(walletId);
+      fetchTransactions();
+    }
+
+    async function fetchBalance(walletId) {
+      try {
+        const res = await fetch(`/api/wallets/${walletId}/balance`);
+        const data = await res.json();
+        if (res.ok) {
+          document.getElementById("balanceAmount").innerText = `₹ ${Number(data.balance).toFixed(2)}`;
+          document.getElementById("balanceMeta").innerText = `Wallet: ${data.walletId} | User: ${data.userId} | Served from: ${data.source.toUpperCase()}`;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function addMoney() {
+      const amount = parseFloat(document.getElementById("addAmount").value);
+      const method = document.getElementById("paymentMethod").value;
+      if (!amount || amount <= 0) {
+        showAlert("Please enter a valid positive amount.", "error");
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/wallets/${activeWalletId}/add-money`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ amount: amount, paymentMethod: method })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          showAlert(`Successfully added ₹${amount} to ${activeWalletId}! Txn ID: ${data.transactionId}`, "success");
+          document.getElementById("addAmount").value = "";
+          loadWallets();
+        } else {
+          showAlert(data.error || "Failed to add money", "error");
+        }
+      } catch (e) {
+        showAlert("Error connecting to server: " + e.message, "error");
+      }
+    }
+
+    async function executeTransfer() {
+      const from = document.getElementById("transferFrom").value;
+      const to = document.getElementById("transferTo").value;
+      const amount = parseFloat(document.getElementById("transferAmount").value);
+      const idemp = document.getElementById("idempotencyKey").value.trim();
+
+      if (!amount || amount <= 0) {
+        showAlert("Please enter a valid positive transfer amount.", "error");
+        return;
+      }
+      if (from === to) {
+        showAlert("Sender and receiver wallets cannot be the same.", "error");
+        return;
+      }
+
+      try {
+        const payload = { fromWalletId: from, toWalletId: to, amount: amount };
+        if (idemp) payload.idempotencyKey = idemp;
+
+        const res = await fetch('/api/transfers', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (res.ok || res.status === 201) {
+          showAlert(`Transfer successful! Transferred ₹${amount} from ${from} to ${to}. [Txn: ${data.transactionId}]`, "success");
+          document.getElementById("transferAmount").value = "";
+          document.getElementById("idempotencyKey").value = "";
+          loadWallets();
+        } else {
+          showAlert(`Transfer Failed (${res.status}): ${data.error || 'Server error'}`, "error");
+        }
+      } catch (e) {
+        showAlert("Transfer request error: " + e.message, "error");
+      }
+    }
+
+    async function fetchTransactions() {
+      try {
+        const res = await fetch(`/api/wallets/${activeWalletId}/transactions`);
+        const data = await res.json();
+        const list = document.getElementById("transactionsList");
+        list.innerHTML = "";
+
+        if (!data.transactions || data.transactions.length === 0) {
+          list.innerHTML = `<p style="color: var(--text-muted); text-align: center; padding: 24px;">No transactions recorded for ${activeWalletId}.</p>`;
+          return;
+        }
+
+        data.transactions.forEach(t => {
+          const isCredit = t.receiverWalletId === activeWalletId && t.senderWalletId !== activeWalletId;
+          const sign = isCredit ? "+" : "-";
+          const color = isCredit ? "var(--success)" : "var(--danger)";
+          const item = document.createElement("div");
+          item.className = "feed-item";
+          item.innerHTML = `
+            <div>
+              <div style="font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                <span>${t.type === 'ADD_MONEY' ? '💳 Add Money' : (isCredit ? '📥 Received' : '📤 Sent')}</span>
+                <span class="badge-success">${t.status}</span>
+              </div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 3px;">
+                ID: ${t.transactionId} | ${t.timestamp ? t.timestamp.substring(0, 19).replace('T', ' ') : ''}
+              </div>
+              <div style="font-size: 11px; color: #94a3b8;">
+                ${t.senderWalletId ? 'From: ' + t.senderWalletId : 'Via Payment Gateway'} → To: ${t.receiverWalletId}
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 16px; font-weight: 700; color: ${color};">
+                ${sign} ₹${Number(t.amount).toFixed(2)}
+              </div>
+              <a href="/api/transactions/${t.transactionId}/download" target="_blank" class="receipt-link" style="margin-top: 4px;">
+                📄 Download PDF Receipt
+              </a>
+            </div>
+          `;
+          list.appendChild(item);
+        });
+      } catch (e) {
+        console.error("Error fetching transactions", e);
+      }
+    }
+
+    function showAlert(msg, type) {
+      const box = document.getElementById("alertBox");
+      box.className = `alert-banner alert-${type}`;
+      box.innerText = msg;
+      box.style.display = "block";
+      setTimeout(() => {
+        box.style.display = "none";
+      }, 6000);
+    }
+
+    window.onload = loadWallets;
+  </script>
+</body>
+</html>

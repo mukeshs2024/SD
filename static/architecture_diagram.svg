@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="650" fill="url(#bgGrad)"/>
+
+  <!-- Title Header -->
+  <text x="500" y="45" text-anchor="middle" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="22" font-weight="bold">HIGH-LEVEL SYSTEM ARCHITECTURE</text>
+  <text x="500" y="70" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="13">Digital Wallet &amp; Payment Platform — Microservices, Cache-Aside, &amp; Event-Driven Design</text>
+
+  <!-- LAYER 1: CLIENTS -->
+  <g transform="translate(60, 105)" filter="url(#shadow)">
+    <rect width="180" height="90" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.5"/>
+    <text x="90" y="38" text-anchor="middle" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="14" font-weight="bold">📱 Mobile Apps</text>
+    <text x="90" y="58" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="11">iOS &amp; Android (React Native)</text>
+    <text x="90" y="74" text-anchor="middle" fill="#64748b" font-family="Segoe UI, sans-serif" font-size="10">HTTPS / TLS 1.3</text>
+  </g>
+
+  <g transform="translate(60, 215)" filter="url(#shadow)">
+    <rect width="180" height="90" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.5"/>
+    <text x="90" y="38" text-anchor="middle" fill="#38bdf8" font-family="Segoe UI, sans-serif" font-size="14" font-weight="bold">💻 Web Client</text>
+    <text x="90" y="58" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="11">Single Page App / Browser</text>
+    <text x="90" y="74" text-anchor="middle" fill="#64748b" font-family="Segoe UI, sans-serif" font-size="10">REST JSON Client</text>
+  </g>
+
+  <!-- LAYER 2: API GATEWAY -->
+  <g transform="translate(300, 105)" filter="url(#shadow)">
+    <rect width="190" height="200" rx="14" fill="#1e293b" stroke="#4f46e5" stroke-width="2"/>
+    <text x="95" y="34" text-anchor="middle" fill="#a5b4fc" font-family="Segoe UI, sans-serif" font-size="15" font-weight="bold">🛡️ API GATEWAY</text>
+    <line x1="20" y1="46" x2="170" y2="46" stroke="#334155"/>
+    <text x="30" y="70" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Reverse Proxy (NGINX/Kong)</text>
+    <text x="30" y="95" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Rate Limiting (Token Bucket)</text>
+    <text x="30" y="120" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• SSL Termination</text>
+    <text x="30" y="145" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Authentication (JWT)</text>
+    <text x="30" y="170" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Idempotency Key Filter</text>
+  </g>
+
+  <!-- LAYER 3: CORE BACKEND SERVICES -->
+  <g transform="translate(550, 95)">
+    <!-- Wallet Service -->
+    <rect x="0" y="0" width="180" height="65" rx="10" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="90" y="28" text-anchor="middle" fill="#67e8f9" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold">💼 Wallet Service</text>
+    <text x="90" y="46" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="10">Balance, Ledger, Limits</text>
+
+    <!-- Transaction Service -->
+    <rect x="0" y="80" width="180" height="65" rx="10" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="90" y="108" text-anchor="middle" fill="#67e8f9" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold">🔄 Transaction Service</text>
+    <text x="90" y="126" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="10">ACID Atomic P2P Transfers</text>
+
+    <!-- Payment Service -->
+    <rect x="0" y="160" width="180" height="65" rx="10" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="90" y="188" text-anchor="middle" fill="#67e8f9" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold">💳 Payment Service</text>
+    <text x="90" y="206" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="10">Gateway (UPI, Card, NetBanking)</text>
+
+    <!-- User Service -->
+    <rect x="0" y="240" width="180" height="65" rx="10" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="90" y="268" text-anchor="middle" fill="#67e8f9" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold">👤 User Service</text>
+    <text x="90" y="286" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="10">Profiles, KYC, Auth</text>
+  </g>
+
+  <!-- LAYER 4: FRAUD DETECTION & NOTIFICATION -->
+  <g transform="translate(770, 115)">
+    <!-- Fraud Detection -->
+    <rect x="0" y="0" width="180" height="85" rx="10" fill="#1e293b" stroke="#f43f5e" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="90" y="32" text-anchor="middle" fill="#fda4af" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold">🚨 Fraud Detection</text>
+    <text x="90" y="52" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="10">Rule Engine &amp; Velocity</text>
+    <text x="90" y="68" text-anchor="middle" fill="#f43f5e" font-family="Segoe UI, sans-serif" font-size="9">Cap: ₹100,000 / Alert &gt; 25k</text>
+
+    <!-- Notification Service -->
+    <rect x="0" y="110" width="180" height="85" rx="10" fill="#1e293b" stroke="#10b981" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="90" y="142" text-anchor="middle" fill="#6ee7b7" font-family="Segoe UI, sans-serif" font-size="12" font-weight="bold">🔔 Notification Service</text>
+    <text x="90" y="162" text-anchor="middle" fill="#94a3b8" font-family="Segoe UI, sans-serif" font-size="10">Asynchronous Push/SMS/Email</text>
+    <text x="90" y="178" text-anchor="middle" fill="#10b981" font-family="Segoe UI, sans-serif" font-size="9">Decoupled from Core Txn</text>
+  </g>
+
+  <!-- LAYER 5: STORAGE & INFRASTRUCTURE -->
+  <!-- Redis Cache -->
+  <g transform="translate(160, 440)" filter="url(#shadow)">
+    <rect width="210" height="110" rx="12" fill="#1e293b" stroke="#e11d48" stroke-width="1.5"/>
+    <text x="105" y="32" text-anchor="middle" fill="#fb7185" font-family="Segoe UI, sans-serif" font-size="14" font-weight="bold">⚡ REDIS CACHE</text>
+    <line x1="20" y1="44" x2="190" y2="44" stroke="#334155"/>
+    <text x="25" y="66" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Balance Caching (Cache-Aside)</text>
+    <text x="25" y="86" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Invalidation on Transfer</text>
+    <text x="25" y="102" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Distributed Locks (Redlock)</text>
+  </g>
+
+  <!-- Database (PostgreSQL / SQLite) -->
+  <g transform="translate(410, 440)" filter="url(#shadow)">
+    <rect width="230" height="110" rx="12" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <text x="115" y="32" text-anchor="middle" fill="#93c5fd" font-family="Segoe UI, sans-serif" font-size="14" font-weight="bold">🗄️ PERSISTENT DATABASE</text>
+    <line x1="20" y1="44" x2="210" y2="44" stroke="#334155"/>
+    <text x="25" y="66" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• PostgreSQL / SQLite Development</text>
+    <text x="25" y="86" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Users, Wallets, Transactions, Payments</text>
+    <text x="25" y="102" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• ACID Atomicity &amp; Row-Level Locks</text>
+  </g>
+
+  <!-- Message Broker -->
+  <g transform="translate(680, 440)" filter="url(#shadow)">
+    <rect width="230" height="110" rx="12" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="115" y="32" text-anchor="middle" fill="#fcd34d" font-family="Segoe UI, sans-serif" font-size="14" font-weight="bold">📨 MESSAGE BROKER</text>
+    <line x1="20" y1="44" x2="210" y2="44" stroke="#334155"/>
+    <text x="25" y="66" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Kafka / RabbitMQ Event Bus</text>
+    <text x="25" y="86" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Events: TRANSFER_COMPLETED</text>
+    <text x="25" y="102" fill="#f8fafc" font-family="Segoe UI, sans-serif" font-size="11">• Outbox Pattern for Zero Loss</text>
+  </g>
+
+  <!-- Connecting Lines -->
+  <!-- Clients to Gateway -->
+  <path d="M 240 150 L 300 170" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4" fill="none"/>
+  <path d="M 240 260 L 300 230" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4" fill="none"/>
+
+  <!-- Gateway to Services -->
+  <path d="M 490 205 L 550 130" stroke="#818cf8" stroke-width="2" fill="none"/>
+  <path d="M 490 205 L 550 200" stroke="#818cf8" stroke-width="2" fill="none"/>
+  <path d="M 490 205 L 550 270" stroke="#818cf8" stroke-width="2" fill="none"/>
+
+  <!-- Services to DB -->
+  <path d="M 640 370 L 525 440" stroke="#38bdf8" stroke-width="2" fill="none"/>
+
+  <!-- Services to Cache -->
+  <path d="M 580 370 L 300 440" stroke="#f43f5e" stroke-width="2" fill="none"/>
+
+  <!-- Services to Broker -->
+  <path d="M 700 370 L 780 440" stroke="#f59e0b" stroke-width="2" fill="none"/>
+
+  <!-- Broker to Notifications & Fraud -->
+  <path d="M 820 440 L 860 320" stroke="#10b981" stroke-width="2" stroke-dasharray="4" fill="none"/>
+
+  <!-- Bottom Legend -->
+  <rect x="180" y="585" width="640" height="40" rx="8" fill="#1e293b" stroke="#334155"/>
+  <circle cx="210" cy="605" r="5" fill="#38bdf8"/>
+  <text x="225" y="609" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="11">HTTPS/REST Client</text>
+  <circle cx="370" cy="605" r="5" fill="#818cf8"/>
+  <text x="385" y="609" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="11">Synchronous Microservice Call</text>
+  <circle cx="580" cy="605" r="5" fill="#f59e0b"/>
+  <text x="595" y="609" fill="#cbd5e1" font-family="Segoe UI, sans-serif" font-size="11">Asynchronous Decoupled Event</text>
+</svg>
